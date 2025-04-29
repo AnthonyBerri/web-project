@@ -1,0 +1,44 @@
+*{
+    margin: 0px;
+}
+
+body{
+    align-items: center;
+}
+
+.header-nav{
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(37, 37, 93);
+    color: #e0e0e0;
+}
+
+.ham-menu{
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.logo{
+    font-family: 'Courier New';
+}
+
+.profile{
+    padding-right: 10px;
+}
+
+.mainbody{
+    padding-top: 80px;
+    display: flex;
+}
+
+.clicker-area{
+    
+}
+
+.market-area{
+    
+}
