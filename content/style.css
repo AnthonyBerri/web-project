@@ -33,12 +33,17 @@ body{
 .mainbody{
     padding-top: 80px;
     display: flex;
+    justify-content: space-between;
 }
 
 .clicker-area{
-    
+    width: 50%;
+    justify-content: center;
+    text-align: center;
 }
 
 .market-area{
-    
+    width: 50%;
+    justify-content: center;
+    text-align: center;
 }
