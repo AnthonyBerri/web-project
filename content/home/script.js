@@ -1,13 +1,14 @@
-let count = 0;
-let priceText = document.getElementById("price").textContent;
-let price = 0; 
-let marketpointer = 0;
-let pointer = 0;
+import { saveData } from '../save/script'
+import { loadData } from '../save/script'
 
 const marketproducts = {product:["Rocket Tier 1", "Kit Nitro", "Kit Turbo"], 
     prices:[150, 25, 75], 
     description:["New tyres to have more grip", "Kit Nitro 5L", "Kit Turbo Padaria"], 
     clickpassive:[1, 2, 5, 10]}; // Presta atenção que o dinheiro passivo sempre tem que ter 1 a mais que os itens
+
+let count = 0;
+let price = 0; 
+let marketpointer = 0;
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter" && event.target.tagName !== "TEXTAREA") {
@@ -30,9 +31,9 @@ document.getElementById("toggleBtn").addEventListener("click", function() {
 //STARTUI
 
 function start(){
-    document.getElementById("product").textContent = marketproducts.product[pointer];
-    document.getElementById("price").textContent = marketproducts.prices[pointer];
-    document.getElementById("description").textContent = marketproducts.description[pointer];
+    document.getElementById("product").textContent = marketproducts.product[marketpointer];
+    document.getElementById("price").textContent = marketproducts.prices[marketpointer];
+    document.getElementById("description").textContent = marketproducts.description[marketpointer];
 }
 
 //SLEEP FUNCTION
@@ -44,12 +45,20 @@ function sleep(ms) {
 //PASSIVE CLICK
 
 async function passiveclick (){
-    while(pointer>-1){
-        count+=marketproducts.clickpassive[pointer];
+    while(marketpointer>-1){
+        count+=marketproducts.clickpassive[marketpointer];
         await sleep(1000);
         document.getElementById("nitro").textContent ="Nitro: " + count;
+        
     }
 
+}
+
+//LOAD DATA
+
+async function initializeData (){
+    count = 
+    document.getElementById("nitro").textContent ="Nitro: " + count;
 }
 
 //CLICKER BUTTON
@@ -57,14 +66,15 @@ async function passiveclick (){
 document.getElementById("clicker").addEventListener("click", function() {
     count++;
     document.getElementById("nitro").textContent ="Nitro: " + count;
+    saveData(count, marketpointer);
 });
 
 //MARKET BUTTON
 
 document.getElementById("market").addEventListener("click", async function buy () {
-    price = marketproducts.prices[pointer];
-    if (pointer == marketproducts.product.length){
-        pointer = pointer;
+    price = marketproducts.prices[marketpointer];
+    if (marketpointer == marketproducts.product.length){
+        marketpointer = marketpointer;
     } else if (price > count) {
         document.getElementById("errormessage").textContent = "You can't buy it.";
         await sleep(2000);
@@ -72,11 +82,11 @@ document.getElementById("market").addEventListener("click", async function buy (
     } else {
         count -= price;
         document.getElementById("nitro").textContent = "Nitro: " + count;
-        pointer++;
+        marketpointer++;
     }
-    document.getElementById("product").textContent = marketproducts.product[pointer];
-    document.getElementById("price").textContent = marketproducts.prices[pointer];
-    document.getElementById("description").textContent = marketproducts.description[pointer];
+    document.getElementById("product").textContent = marketproducts.product[marketpointer];
+    document.getElementById("price").textContent = marketproducts.prices[marketpointer];
+    document.getElementById("description").textContent = marketproducts.description[marketpointer];
 });
 
 start();
