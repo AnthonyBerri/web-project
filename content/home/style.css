@@ -22,8 +22,44 @@ body{
     font-size: 12px;
 }
 
+.invisiblebutton{
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+#sidebar {
+    position: fixed;
+    left: -250px;
+    top: 70px;
+    width: 250px;
+    height: 100%;
+    background-color: rgb(37, 37, 93);
+    color: white;
+    transition: 0.3s;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 30px;
+}
+
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
 .logo{
     font-family: 'Courier New';
+    justify-content: space-between;
+    align-items: center;
 }
 
 .profile{

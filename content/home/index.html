@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=4, initial-scale=1.0">
+    <title>na.lua</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="header-nav">
+            <div class="ham-menu"><button id="toggleBtn" class="invisiblebutton">☰</button></div>
+            <div class="logo"><t style="font-weight: bold; font-size: large; color: rgb(253, 202, 62);">na</t><t style="color: white; font-size:25px;">.</t><t style="color: rgb(253, 202, 62); font-size: large; font-weight: bold;">lua</t></div>
+            <div class="profile"><h1>O</h1></div>
+        </nav>
+        <div id="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="../home/index.html">Home</a></li>
+                <li><a href="../space/index.html">Space</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="mainbody">
+        <div class="clicker-area">
+            <h1>Clicks</h1>
+            <p id="nitro">Nitro: 0</p>
+            <button style="width: 100px; height: 25px; background-color: cadetblue;" id="clicker"></button>
+        </div>
+
+        <div class="market-area">
+            <h1>Market</h1>
+            <p id="product"></p>
+            <p id="price"></p>
+            <p id="description"></p>
+            <p id="errormessage"></p>
+            <button style="width: 100px; height: 25px; background-color: cadetblue;" id="market">Buy!</button>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
