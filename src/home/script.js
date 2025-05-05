@@ -4,8 +4,8 @@ const marketproducts = {product:["Rocket Tier 1", "Kit Coins", "Kit Turbo"],
     description:["New tyres to have more grip", "Kit Coins 5L", "Kit Turbo Padaria"], 
     clickpassive:[1, 2, 5, 10]}; // Presta atenção que o dinheiro passivo sempre tem que ter 1 a mais que os itens
 
+let isFirstTime = true;
 let count = 0;
-let price = 0; 
 let marketpointer = 0;
 
 document.addEventListener("keydown", function(event) {
@@ -28,10 +28,17 @@ document.getElementById("toggleBtn").addEventListener("click", function() {
 
 //STARTUI
 
-function start(){
-    document.getElementById("product").textContent = marketproducts.product[marketpointer];
-    document.getElementById("price").textContent = marketproducts.prices[marketpointer];
-    document.getElementById("description").textContent = marketproducts.description[marketpointer];
+async function start(){
+    await sleep (75);
+    if(isFirstTime == false){
+        marketpointer = Number(localStorage.getItem("marketpointer"));
+        document.getElementById("product").textContent = marketproducts.product[marketpointer];
+        document.getElementById("price").textContent = marketproducts.prices[marketpointer];
+        document.getElementById("description").textContent = marketproducts.description[marketpointer];
+    }
+    document.getElementById("product").textContent = marketproducts.product[0];
+    document.getElementById("price").textContent = marketproducts.prices[0];
+    document.getElementById("description").textContent = marketproducts.description[0];
 }
 
 //SLEEP FUNCTION
@@ -45,9 +52,10 @@ function sleep(ms) {
 async function passiveclick (){
     while(marketpointer>-1){
         count+=marketproducts.clickpassive[marketpointer];
-        await sleep(1000);
         document.getElementById("Coins").textContent ="Coins: " + count;
-        
+        await sleep(1000);
+        localStorage.setItem("count", count);
+        count = Number(localStorage.getItem("count"));
     }
 
 }
@@ -57,6 +65,7 @@ async function passiveclick (){
 document.getElementById("clicker").addEventListener("click", function() {
     count++;
     document.getElementById("Coins").textContent ="Coins: " + count;
+    localStorage.setItem("count", count);
 });
 
 //MARKET BUTTON
@@ -73,11 +82,36 @@ document.getElementById("market").addEventListener("click", async function buy (
         count -= price;
         document.getElementById("Coins").textContent = "Coins: " + count;
         marketpointer++;
+        isFirstTime = false;
+        localStorage.setItem("marketpointer", marketpointer);
     }
     document.getElementById("product").textContent = marketproducts.product[marketpointer];
     document.getElementById("price").textContent = marketproducts.prices[marketpointer];
     document.getElementById("description").textContent = marketproducts.description[marketpointer];
 });
 
-start();
+//PLAYER
+
+document.addEventListener("keydown", function(event) {
+    let character = document.getElementById("character");
+    let left = parseInt(window.getComputedStyle(character).left);
+    let top = parseInt(window.getComputedStyle(character).top);
+  
+    switch(event.key) {
+      case "a":
+        character.style.left = left - 10 + "px";
+        break;
+      case "d":
+        character.style.left = left + 10 + "px";
+        break;
+      case "w":
+        character.style.top = top - 10 + "px";
+        break;
+      case "s":
+        character.style.top = top + 10 + "px";
+        break;
+    }
+  });
+
 passiveclick();
+start();
