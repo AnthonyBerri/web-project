@@ -90,28 +90,5 @@ document.getElementById("market").addEventListener("click", async function buy (
     document.getElementById("description").textContent = marketproducts.description[marketpointer];
 });
 
-//PLAYER
-
-document.addEventListener("keydown", function(event) {
-    let character = document.getElementById("character");
-    let left = parseInt(window.getComputedStyle(character).left);
-    let top = parseInt(window.getComputedStyle(character).top);
-  
-    switch(event.key) {
-      case "a":
-        character.style.left = left - 10 + "px";
-        break;
-      case "d":
-        character.style.left = left + 10 + "px";
-        break;
-      case "w":
-        character.style.top = top - 10 + "px";
-        break;
-      case "s":
-        character.style.top = top + 10 + "px";
-        break;
-    }
-  });
-
 passiveclick();
 start();
